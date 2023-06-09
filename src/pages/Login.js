@@ -1,16 +1,23 @@
-import {useRef} from "react";
+import {useContext, useRef} from "react";
 import {Button, Col, Container, Row, Form} from "react-bootstrap";
+import AuthContext from "../components/shared/AuthContext";
 
 const Login = () => {
 
     const email = useRef("");
     const password = useRef("");
+    const { login } = useContext(AuthContext);
 
     const loginSubmit = async () => {
+        let payload = {
+            email: email.current.value,
+            password: password.current.value,
+        };
+        await login(payload);
     };
+
     return (
         <>
-
             <Container className="mt-2">
                 <Row>
                     <Col className="col-md-8 offset-md-2">
